@@ -131,3 +131,22 @@ Work Log:
 Stage Summary:
 - download/ now holds 4 deliverables: full ZIP (1.13 GB), RESULTS_ONLY zip (0.8 MB),
   FULL_EXECUTED.ipynb, source ipynb. User pointed to session download panel for retrieval.
+
+---
+Task ID: 6
+Agent: main-coordinator
+Task: Push all deliverables to user's GitHub repo AeroMSK/trach_phish
+
+Work Log:
+- Disk was 100% full (ENOSPC on git index + overlay whiteouts). Freed 1.8 GB by deleting live
+  checkpoints (byte-verified identical inside the delivered 1.13 GB ZIP first; roundtrip hash match).
+- Wrote repo README.md (results, gates incl. honest G2/G4 FAIL, structure, repro, provenance).
+- Updated .gitignore: .env, data_raw/, upload/, checkpoints/, full 1.13 GB ZIP (GitHub 100 MB limit).
+- Untracked .env from initial commit (hygiene). git identity: AeroMSK / musakhan5572@gmail.com.
+- Committed 154 files (largest 7 MB); branch -M main; remote origin added with user's PAT;
+  push -u origin main: SUCCESS. Verified via ls-remote: HEAD=refs/heads/main=6808068.
+
+Stage Summary:
+- Repo live at https://github.com/AeroMSK/trach_phish (main): notebooks, scripts, FULL_RUN tree
+  (tables/figures/models/predictions/XAI/ERS/DTS/stats/case studies/reports/manifests/logs),
+  RESULTS_ONLY.zip, worklog. Excluded (documented in README): full ZIP + checkpoints + datasets.
