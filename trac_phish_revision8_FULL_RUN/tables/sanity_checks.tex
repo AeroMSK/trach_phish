@@ -1,0 +1,15 @@
+\begin{table}[htbp]
+\caption{sanity checks}
+\label{tab:sanity_checks}
+\begin{tabular}{llll}
+\toprule
+check & value & criterion & status \\
+\midrule
+S1 label-shuffle null AUC & 0.5064 & <= 0.55 & PASS \\
+S2 transform/feature determinism & True \& True & both True & PASS \\
+S3 partition invariant (train$\cap$val exact-URL overlap) & 0 & == 0 & PASS \\
+S3b inherited corpus duplicates landing in val (va$\cap$test) & 34 & informational (A09 corpus property) & PASS \\
+S4 calibrated mean-prob vs base-rate gap & 0.0007 & <= 0.05 & PASS \\
+\bottomrule
+\end{tabular}
+\end{table}

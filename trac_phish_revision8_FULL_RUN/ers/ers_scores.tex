@@ -1,0 +1,16 @@
+\begin{table}[htbp]
+\caption{ers scores}
+\label{tab:ers_scores}
+\begin{tabular}{lrrrr}
+\toprule
+perturbation & topk_jaccard & sign_agreement & spearman_rank & ERS \\
+\midrule
+case\_random & 1.0000 & 1.0000 & 1.0000 & 1.0000 \\
+typo\_swap & 0.8472 & 1.0000 & 0.9903 & 0.9360 \\
+pad\_benign & 0.3682 & 1.0000 & 0.7426 & 0.6701 \\
+subdomain\_junk & 0.7359 & 1.0000 & 0.9571 & 0.8815 \\
+query\_junk & 0.2546 & 0.9600 & 0.4651 & 0.5294 \\
+OVERALL(mean) & 0.6412 & 0.9920 & 0.8310 & 0.8034 \\
+\bottomrule
+\end{tabular}
+\end{table}

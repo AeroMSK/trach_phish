@@ -1,0 +1,18 @@
+\begin{table}[htbp]
+\caption{gates}
+\label{tab:gates}
+\begin{tabular}{lllll}
+\toprule
+gate & name & criterion & status & strict_status \\
+\midrule
+G1 & data\_integrity & all schema/row/label audit checks PASS & True & PASS \\
+G2 & no\_url\_leakage & exact-URL GB train$\cap$test rate 0.19820\% <= 0.100\% & FAIL & FAIL \\
+G3 & performance & GB-test F1 0.9746 >= 0.90 AND ROC-AUC 0.9964 >= 0.95 & PASS & PASS \\
+G4 & transfer\_floor & PP-2026 zero-shot F1 0.5101 >= 0.60 & FAIL & FAIL \\
+G5 & calibration & post-calibration ECE 0.0021 <= 0.05 & PASS & PASS \\
+G6 & ers & overall ERS 0.8034 (PASS>=0.60, WARN>=0.45) & PASS & PASS \\
+G7 & dts & overall DTS 0.9733 >= 0.70 & PASS & PASS \\
+G8 & sanity & null-collapse, determinism, partition integrity, base-rate all PASS & PASS & PASS \\
+\bottomrule
+\end{tabular}
+\end{table}

@@ -1,2 +1,8 @@
 skills/
 node_modules/
+.env
+upload/
+data_raw/
+trac_phish_revision8_FULL_RUN/checkpoints/
+download/trac_phish_revision8_FULL_RUN_ALL_OUTPUTS.zip
+db/

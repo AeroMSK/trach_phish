@@ -1,0 +1,41 @@
+agent,role,mode,status
+A01,Archive & Integrity Auditor,pre-execution LLM subagent,PASS
+A02,Schema & Label Auditor,pre-execution LLM subagent,PASS
+A03,Temporal Integrity Auditor,pre-execution LLM subagent,PASS
+A04,Class Balance & Duplicate Auditor,pre-execution LLM subagent,PASS
+A05,Cross-Dataset Overlap Pre-Scanner,pre-execution LLM subagent,PASS
+A06,Execution Plan & Environment Reviewer,pre-execution LLM subagent,GO-WITH-CHANGES (adopted)
+A07,Dataset audit,in-pipeline stage agent,COMPLETED
+A08,Cleaning & dedup ledger,in-pipeline stage agent,COMPLETED
+A09,Leakage/overlap analysis,in-pipeline stage agent,COMPLETED
+A10,Partitioning,in-pipeline stage agent,COMPLETED
+A11,Lexical feature extraction,in-pipeline stage agent,COMPLETED
+A12,Char n-gram TF-IDF,in-pipeline stage agent,COMPLETED
+A13,Representation analysis,in-pipeline stage agent,COMPLETED
+A14,Baselines,in-pipeline stage agent,COMPLETED
+A15,N-gram model training,in-pipeline stage agent,COMPLETED
+A16,Lexical models,in-pipeline stage agent,COMPLETED
+A17,Model selection,in-pipeline stage agent,COMPLETED
+A18,Main test evaluation,in-pipeline stage agent,COMPLETED
+A19,Transfer zero-shot,in-pipeline stage agent,COMPLETED
+A20,Robustness suite,in-pipeline stage agent,COMPLETED
+A21,Calibration,in-pipeline stage agent,COMPLETED
+A22,SHAP/XAI,in-pipeline stage agent,COMPLETED
+A23,Explanation stability / ERS,in-pipeline stage agent,COMPLETED
+A24,DTS,in-pipeline stage agent,COMPLETED
+A25,Main Metrics Verifier,post-execution LLM verification subagent,PASS
+A26,Leakage Audit Verifier,post-execution LLM verification subagent,PASS
+A27,Transfer Results Verifier,post-execution LLM verification subagent,PASS
+A28,Calibration Verifier,post-execution LLM verification subagent,PASS
+A29,Robustness Verifier,post-execution LLM verification subagent,PASS
+A30,SHAP/ERS Verifier,post-execution LLM verification subagent,PASS
+A31,DTS Verifier,post-execution LLM verification subagent,PASS
+A32,Statistical Tests Verifier,post-execution LLM verification subagent,"PASS_WITH_DEFECTS -> MCC int64-overflow bug FIXED, notebook re-executed (run 15); fix verified [0.9482, 0.9512]"
+A33,Gates & Negative-Results Auditor,post-execution LLM verification subagent,PASS (honest reporting confirmed)
+A34,Case Studies QA,post-execution LLM verification subagent,PASS (12/12)
+A35,Sanity Checks Auditor,post-execution LLM verification subagent,PASS (determinism independently reproduced)
+A36,Reproducibility Auditor,post-execution LLM verification subagent,PASS
+A37,Tables/LaTeX QA,post-execution LLM verification subagent,"CONDITIONAL FAIL -> LaTeX escaping FIXED, notebook re-executed (run 16); escaping verified"
+A38,Figures QA,post-execution LLM verification subagent,PASS (9/9)
+A39,Artifact & Manifest QA,post-execution LLM verification subagent,"PASS (128 files, hashes verified)"
+A40,Notebook Validation,post-execution LLM verification subagent,"PASS (31/31 cells, FULL banner, SELF-VALIDATION PASS)"

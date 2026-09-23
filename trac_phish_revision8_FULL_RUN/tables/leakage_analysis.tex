@@ -1,0 +1,18 @@
+\begin{table}[htbp]
+\caption{leakage analysis}
+\label{tab:leakage_analysis}
+\begin{tabular}{llll}
+\toprule
+metric & value & rate & assessment \\
+\midrule
+exact-URL overlap GB train$\cap$test & 317 & 0.1982\% of test & URL-level leakage (gate G2, threshold 0.1\%) \\
+hostname overlap GB train$\cap$test & 50985 & 39.77\% of test hosts & in-corpus random-split property: generalization caveat (informational, not URL leakage) \\
+registrable-domain overlap GB train$\cap$test & 48408 & 45.66\% of test domains & domain-level relatedness (informational) \\
+PP sha256 duplicates within test & 0 & --- & record-level duplication \\
+exact-URL overlap PP\_train(meta)$\cap$PP\_test --- provider split & 0 & 0.000\% & verified by pre-audit agent A03/A05: 0 overlapping URLs, 0 shared sha256 \\
+exact-URL overlap GB train$\cap$PP test & 23 & 0.0137\% of PP test & cross-corpus contamination \\
+exact-URL overlap GB test$\cap$PP test & 12 & 0.0071\% of PP test & cross-corpus contamination \\
+PP temporal boundary & train max 2025-09-08 = test min 2025-09-08 (non-strict, provider-side) & 681 train / 995 test rows share boundary date & recorded honestly; no URL/sha overlap across split \\
+\bottomrule
+\end{tabular}
+\end{table}

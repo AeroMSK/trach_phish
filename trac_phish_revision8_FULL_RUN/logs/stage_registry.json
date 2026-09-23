@@ -1,0 +1,128 @@
+{
+  "A07": {
+    "name": "Dataset audit & schema verification",
+    "status": "COMPLETED",
+    "t0": 1790189784.408334,
+    "t1": 1790189784.9804354,
+    "seconds": 0.57
+  },
+  "A08": {
+    "name": "Structural cleaning & deduplication ledger",
+    "status": "COMPLETED",
+    "t0": 1790189784.9945533,
+    "t1": 1790189788.162966,
+    "seconds": 3.17
+  },
+  "A09": {
+    "name": "Leakage & overlap analysis (URL / host / registrable-domain)",
+    "status": "COMPLETED",
+    "t0": 1790189788.17958,
+    "t1": 1790189793.2211363,
+    "seconds": 5.04
+  },
+  "A10": {
+    "name": "Stratified train/val partitioning + integrity re-check",
+    "status": "COMPLETED",
+    "t0": 1790189793.3495853,
+    "t1": 1790189794.4792364,
+    "seconds": 1.13
+  },
+  "A11": {
+    "name": "Lexical feature extraction (27 features, all rows)",
+    "status": "COMPLETED",
+    "t0": 1790189794.4990485,
+    "t1": 1790189795.185989,
+    "seconds": 0.69
+  },
+  "A12": {
+    "name": "Char n-gram TF-IDF (1-5 grams, two-stage vocabulary, float32)",
+    "status": "COMPLETED",
+    "t0": 1790189795.215849,
+    "t1": 1790189799.0395496,
+    "seconds": 3.82
+  },
+  "A13": {
+    "name": "Representation analysis (sparsity, class log-odds, SVD geometry, kNN probe)",
+    "status": "COMPLETED",
+    "t0": 1790189799.1939714,
+    "t1": 1790189804.790515,
+    "seconds": 5.6
+  },
+  "A14": {
+    "name": "Baseline models (majority class + lexical rule)",
+    "status": "COMPLETED",
+    "t0": 1790189804.8031147,
+    "t1": 1790189804.9196641,
+    "seconds": 0.12
+  },
+  "A15": {
+    "name": "Char n-gram model training + validation-grid selection",
+    "status": "COMPLETED",
+    "t0": 1790189804.9429264,
+    "t1": 1790189806.6675267,
+    "seconds": 1.72
+  },
+  "A16": {
+    "name": "Lexical models (HistGradientBoosting + MLP)",
+    "status": "COMPLETED",
+    "t0": 1790189806.7642536,
+    "t1": 1790189809.2801516,
+    "seconds": 2.52
+  },
+  "A17": {
+    "name": "Model selection on validation fold",
+    "status": "COMPLETED",
+    "t0": 1790189809.2937508,
+    "t1": 1790189809.2970793,
+    "seconds": 0.0
+  },
+  "A18": {
+    "name": "Main held-out test evaluation (GB test, 160k rows)",
+    "status": "COMPLETED",
+    "t0": 1790189809.3124838,
+    "t1": 1790189821.3752468,
+    "seconds": 12.06
+  },
+  "A19": {
+    "name": "Zero-shot transfer to PhreshPhish 2026 (URL-only, temporal-shift)",
+    "status": "COMPLETED",
+    "t0": 1790189821.3931227,
+    "t1": 1790189845.3415096,
+    "seconds": 23.95
+  },
+  "A20": {
+    "name": "Perturbation robustness (stratified 25,000-URL test sample, 8 attacks)",
+    "status": "COMPLETED",
+    "t0": 1790189845.3620076,
+    "t1": 1790189882.7553284,
+    "seconds": 37.39
+  },
+  "A21": {
+    "name": "Probability calibration (Platt & isotonic, validation-fit)",
+    "status": "COMPLETED",
+    "t0": 1790189882.7808003,
+    "t1": 1790189883.5008876,
+    "seconds": 0.72
+  },
+  "A22": {
+    "name": "SHAP explainability (analytic interventional linear-SHAP + tree permutation)",
+    "status": "COMPLETED",
+    "t0": 1790189884.4901288,
+    "t1": 1790189903.091098,
+    "seconds": 18.6
+  },
+  "A23": {
+    "name": "Explanation stability under perturbation -> ERS",
+    "status": "COMPLETED",
+    "t0": 1790189903.1128044,
+    "t1": 1790189909.4948826,
+    "seconds": 6.38
+  },
+  "A24": {
+    "name": "Decision Trust Score (flip-rate + confidence-stability composite)",
+    "status": "COMPLETED",
+    "t0": 1790189909.5096002,
+    "t1": 1790189909.6477168,
+    "seconds": 0.14
+  }
+}

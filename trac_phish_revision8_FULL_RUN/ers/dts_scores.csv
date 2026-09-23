@@ -1,0 +1,10 @@
+perturbation,flip_rate,mean_abs_conf_delta,DTS
+case_random,0.0,0.0,1.0
+typo_swap,0.014,0.0199,0.9842
+typo_delete,0.0116,0.0166,0.9869
+pad_benign,0.0456,0.0607,0.9499
+scheme_flip,0.0113,0.0173,0.9869
+www_toggle,0.0254,0.0396,0.9703
+subdomain_junk,0.045,0.063,0.9496
+query_junk,0.0343,0.0591,0.9583
+OVERALL(mean),0.0234,0.0345,0.9733

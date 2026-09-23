@@ -1,0 +1,18 @@
+\begin{table}[htbp]
+\caption{robustness suite}
+\label{tab:robustness_suite}
+\begin{tabular}{lrrrrrrrrrrr}
+\toprule
+perturbation & flip_rate & mean_abs_conf_delta & pert_accuracy & pert_precision & pert_recall & pert_f1 & pert_mcc & pert_balanced_acc & pert_roc_auc & pert_pr_auc & delta_f1_vs_base \\
+\midrule
+case\_random & 0.0000 & 0.0000 & 0.9746 & 0.9839 & 0.9649 & 0.9743 & 0.9493 & 0.9746 & 0.9965 & 0.9969 & 0.0000 \\
+typo\_swap & 0.0140 & 0.0199 & 0.9684 & 0.9807 & 0.9557 & 0.9680 & 0.9372 & 0.9684 & 0.9952 & 0.9957 & -0.0063 \\
+typo\_delete & 0.0116 & 0.0166 & 0.9703 & 0.9807 & 0.9594 & 0.9700 & 0.9408 & 0.9703 & 0.9955 & 0.9960 & -0.0044 \\
+pad\_benign & 0.0456 & 0.0607 & 0.9423 & 0.9970 & 0.8872 & 0.9389 & 0.8900 & 0.9423 & 0.9948 & 0.9955 & -0.0354 \\
+scheme\_flip & 0.0113 & 0.0173 & 0.9727 & 0.9820 & 0.9631 & 0.9725 & 0.9456 & 0.9727 & 0.9957 & 0.9962 & -0.0019 \\
+www\_toggle & 0.0254 & 0.0396 & 0.9624 & 0.9826 & 0.9416 & 0.9616 & 0.9257 & 0.9624 & 0.9929 & 0.9939 & -0.0127 \\
+subdomain\_junk & 0.0450 & 0.0630 & 0.9522 & 0.9228 & 0.9870 & 0.9538 & 0.9067 & 0.9522 & 0.9954 & 0.9959 & -0.0205 \\
+query\_junk & 0.0343 & 0.0591 & 0.9532 & 0.9968 & 0.9092 & 0.9510 & 0.9098 & 0.9532 & 0.9963 & 0.9966 & -0.0233 \\
+\bottomrule
+\end{tabular}
+\end{table}

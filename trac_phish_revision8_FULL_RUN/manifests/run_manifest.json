@@ -1,0 +1,92 @@
+{
+  "run_id": "tracphish-rev8-full-20260923T190229Z",
+  "run_mode": "full",
+  "all_rows": true,
+  "trac_max_rows": null,
+  "notebook_source": "reconstructed from directive (original upload not persisted \u2014 see worklog)",
+  "datasets": {
+    "grambeddings_archive": "4a5572edeb3d37d7563a2c98562408c837c144465ec7e0d45b838134a0e88f46",
+    "phreshphish_archive": "c58b70f02eaa52fe1a7666d4e57f19a759480f53970e88d3e05a71dfd25fbbbb"
+  },
+  "row_counts": {
+    "gb_train_raw": 640000,
+    "gb_test_raw": 160000,
+    "gb_train_clean": 639335,
+    "gb_test_clean": 159943,
+    "train_fold": 575401,
+    "val_fold": 63934,
+    "pp_test": 168060
+  },
+  "selected_model": "LogReg(C=4.0)",
+  "key_metrics": {
+    "gb_test": {
+      "accuracy": 0.974797,
+      "precision": 0.982483,
+      "recall": 0.966814,
+      "f1": 0.974586,
+      "mcc": 0.949715,
+      "balanced_acc": 0.974794,
+      "roc_auc": 0.996374,
+      "pr_auc": 0.996812
+    },
+    "pp2026_zero_shot": {
+      "accuracy": 0.660234,
+      "precision": 0.747718,
+      "recall": 0.387109,
+      "f1": 0.510119,
+      "mcc": 0.324909,
+      "balanced_acc": 0.638596,
+      "roc_auc": 0.787271,
+      "pr_auc": 0.740915
+    },
+    "calibration": {
+      "method": "isotonic",
+      "post_ece_gb_test": 0.0021
+    },
+    "ers_overall": 0.8034,
+    "dts_overall": 0.9733
+  },
+  "gates": {
+    "G1": "True",
+    "G2": "FAIL",
+    "G3": "PASS",
+    "G4": "FAIL",
+    "G5": "PASS",
+    "G6": "PASS",
+    "G7": "PASS",
+    "G8": "PASS"
+  },
+  "gates_all_pass": false,
+  "stages_completed": 18,
+  "stages_total": 18,
+  "agents_total": 40,
+  "agents": {
+    "pre_execution_A01_A06": 6,
+    "in_pipeline_A07_A24": 18,
+    "post_execution_A25_A40": 16,
+    "total_specialists": 40,
+    "coordinator": 1,
+    "roster_file": "manifests/agent_roster.csv",
+    "verification_defects_found_and_fixed": 2,
+    "defects": [
+      "MCC bootstrap int64 overflow (A32) \u2014 fixed run 15, verified",
+      "LaTeX escaping (A37) \u2014 fixed run 16, verified"
+    ]
+  },
+  "artifacts": {
+    "count": 137,
+    "total_bytes": 1928737935,
+    "manifest": "manifests/artifact_manifest.csv"
+  },
+  "finished_utc": "2026-09-23 19:04:22 UTC",
+  "verification": {
+    "post_execution_verifiers": "16/16 dispatched, all completed",
+    "defects_found": 2,
+    "defects_fixed_and_rerun": 2
+  },
+  "final_notebook_run": {
+    "cells_executed": 31,
+    "error_outputs": 0,
+    "notebook": "trac-phish-revision8_FULL_EXECUTED.ipynb"
+  }
+}

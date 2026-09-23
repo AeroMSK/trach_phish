@@ -1,0 +1,12 @@
+item,value
+train fold rows,575401
+val rows,63934
+test rows (held out),159943
+train phish rate,0.4994829692683885
+val phish rate,0.49948384271279755
+partition fingerprint,6f23bfc7dcbf41ca5d6e42f58dd65cd7
+train∩val exact-URL overlap (partition invariant),0
+"corpus-level train/test duplicate URLs (A09, pre-existing)",317
+  of which in train fold,283
+  of which in val fold,34
+"val∩test overlap (= inherited corpus duplicates, not partition leakage)",34

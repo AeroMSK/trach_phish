@@ -1,0 +1,13 @@
+check,actual,expected,status
+GB train rows,640000,640000,PASS
+GB test rows,160000,160000,PASS
+GB train Phish(1),320000,320000,PASS
+GB test Phish(1),80000,80000,PASS
+GB label domain,"[1, 2, 1, 2]","[1, 2, 1, 2]",PASS
+GB classes.txt,"['1:Phish', '2:Legitimate']","['1:Phish', '2:Legitimate']",PASS
+"PP train rows (parquet metadata, not loaded to RAM)",498255,498255,PASS
+PP test rows,168060,168060,PASS
+PP test phish,76800,76800,PASS
+PP schema,"['sha256', 'url', 'label', 'target', 'date']","['sha256', 'url', 'label', 'target', 'date']",PASS
+PP label domain,"['benign', 'phish']","['benign', 'phish']",PASS
+PP null urls,0,0,PASS

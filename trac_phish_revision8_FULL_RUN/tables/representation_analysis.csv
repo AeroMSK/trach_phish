@@ -1,0 +1,7 @@
+metric,value
+vocabulary size,129620.0
+avg active grams per doc (train),214.2
+matrix sparsity (train),0.998347
+grams present in >=1% of phish docs,3161.0
+grams present in >=1% of legit docs,1737.0
+"5-NN probe accuracy (SVD-100, 10k sample)",0.8774

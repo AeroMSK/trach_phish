@@ -1,0 +1,2 @@
+selected_model,selection_fold,val_f1,val_roc_auc,candidates
+LogReg(C=4.0),validation,0.97624,0.996856,13
