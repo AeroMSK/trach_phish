@@ -150,3 +150,30 @@ Stage Summary:
 - Repo live at https://github.com/AeroMSK/trach_phish (main): notebooks, scripts, FULL_RUN tree
   (tables/figures/models/predictions/XAI/ERS/DTS/stats/case studies/reports/manifests/logs),
   RESULTS_ONLY.zip, worklog. Excluded (documented in README): full ZIP + checkpoints + datasets.
+
+---
+Task ID: 7
+Agent: main (Super Z)
+Task: TRAC-Phish Revision 11 — apply modifications 1.1–1.7 to trac-phish-revision11.ipynb (pre-execution)
+
+Work Log:
+- git pull --rebase: integrated user's commits e3fcd55 (trac-phish-revision11.ipynb, 17,710 lines) + e5e0064 (Datasets/grambeddings_dataset_main.rar, 17.6 MB)
+- Verified rar SHA-256 4a5572ed… == Revision-8 run-manifest archive checksum (byte-identical source); local extracted data intact (640K/160K gram rows, phresh parquets)
+- phreshphish_url_only_2026.zip NOT in repo (only the rar uploaded); local data used, noted for README
+- Reclaimed 3.4 GB disk: removed 2.98 GB git tmp-pack garbage + gc --aggressive (.git 3.7 GB → 40 MB)
+- Audited notebook: 207 cells, 98 MD/109 code, zero outputs; sections 1–57 with phases; CFG.criteria A–F; six SHA-256-pinned GATE_SPEC gates + GATE_CHANGELOG; r7_cache checkpointing (keyed pass=r11)
+- Implemented modifications as 6 new sections (12 cells, additive only):
+  * 1.2 Section 22B2: pure-NumPy char CNN (gather-based conv, manual backprop, Adam, documented 250K-row cap)
+  * 1.5 Section 23B (after 39R): 5-seed variance incl. original-seed anchor + seed-vs-increment check
+  * 1.3 Phase H (after Phase G): CORAL + cc-MMD(mean) alignment on F68R/F54R, P2_SCORES + pinned-Gate-2 re-eval
+  * 1.4 Section 29B: greedy hill-climb adversarial composition (P5–P9, Class-I identity enforced)
+  * 1.1 Section 40B/40C (after Section 40): base-rate rejection resampling (5 rates × 200 reps, first-crossing precision@recall) + criteria G/H + Phase-H rows into transfer table
+  * 1.7 Section 54B: claim map, literature comparison, limitations table
+- Cell 5: appended criteria G/H + CFG.revision11 config; cell 188: G/H evaluation inserted
+- Validation: all new cells compile(); AST free-name audit PASS; pinned gate hashes verified intact
+- Numerical smoke tests caught and fixed 3 real bugs: max-pool indexing, missing dense-layer backprop (dH@Wd.T), param/grad ordering; CORAL switched to relative eigenvalue floor (exact: 2.3e-15); step-AP == sklearn (0 err); precision@recall hand-verified with ties
+- Final: 219 cells; saved trac-phish-revision11.ipynb
+
+Stage Summary:
+- Notebook modified additively (1.1–1.7 complete; 1.6 declared as limitation inside 54B)
+- All gates/thresholds/hashes untouched; next: full-scale execution (TRAC_RUN_MODE=full) with r7_cache checkpointing

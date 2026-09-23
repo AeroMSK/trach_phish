@@ -6,3 +6,6 @@ data_raw/
 trac_phish_revision8_FULL_RUN/checkpoints/
 download/trac_phish_revision8_FULL_RUN_ALL_OUTPUTS.zip
 db/
+r11_working/trac_extracted/
+r11_working/trac_phish_results/cache/
+r11_working/trac_phish_results/features/
