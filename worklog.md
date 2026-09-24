@@ -177,3 +177,29 @@ Work Log:
 Stage Summary:
 - Notebook modified additively (1.1–1.7 complete; 1.6 declared as limitation inside 54B)
 - All gates/thresholds/hashes untouched; next: full-scale execution (TRAC_RUN_MODE=full) with r7_cache checkpointing
+
+---
+Task ID: 8
+Agent: main (Super Z)
+Task: Revision 11 full-scale execution — infrastructure hardening + chunked execution through Stage-A tuning
+
+Work Log:
+- Environment: sandbox kills background processes at tool-call end; foreground calls capped ~10 min; 4 GB RAM (notebook designed for 30 GB Kaggle). Executed as sequential 9-min foreground chunks (scripts/execute_r11_chunk.py) with the notebook's own checkpointing + additions below.
+- OOM root causes found and fixed (all infrastructure-only, value-identical, each committed):
+  1. float64 feature-extraction intermediates + whole-corpus vstack duplicates -> float32 chunks, preallocated output, per-chunk disk memos
+  2. fork-pool COW storm -> gc.freeze/unfreeze guards around both fork pools
+  3. whole-frame verification chain (~0.8 GB transients) -> column-wise asserts
+  4. memory hygiene cell: released PHRESH_RAW + 6 provably-unused CLEAN columns; tag columns to Categorical
+  5. _FEAT_NP unbounded cache (up to 5 GB) -> LRU=1 + small-subset fast path (3x threshold)
+  6. leaked scratch frames (df/sub/dfp/q/info/... ~1.05 GB) -> verified-safe memory guard purges
+  7. get_X double copy -> in-place imputation on the private fancy-index copy
+  8. Phase-A v8 intermediates float64 -> float32; full-corpus block -> 100K-row slices
+  9. corrupt checkpoint from interrupted dumps -> atomic tmp+rename writes
+  10. Stage-A tuning: per-config + per-final-fit r7_cache checkpointing (chunk-resilient mid-search resume)
+  11. cached the origin-diagnostic / shift-diagnostics / compat-benchmark prefix cells (restart prefix 5.5 -> 3.2 min)
+- Numerical validation of all new code before execution: CNN gradients 1.3e-8, CORAL exact 2.3e-15, step-AP == sklearn, precision@recall hand-verified
+- ~30 execution chunks; Stage-A tuning COMPLETE for all 4 runs (104 config evals + 16 final fits checkpointed); execution now past cell 82 (validation)
+
+Stage Summary:
+- All fixes committed+pushed (12 infra commits); checkpoints durable under r11_working/trac_phish_results/cache/
+- Next: Stage-A selection, 22B char models, mod-1.2 CNN, Stage-B, populations/TreeSHAP, phases H/29B/40B/23B, final reports
