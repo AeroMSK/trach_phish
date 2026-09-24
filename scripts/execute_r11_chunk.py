@@ -19,6 +19,11 @@ os.environ.pop("TRAC_MAX_ROWS", None)
 os.environ["TRAC_INPUT_ROOT"] = "/home/z/my-project/data_raw"
 os.environ["TRAC_WORK_ROOT"] = "/home/z/my-project/r11_working"
 os.environ["PYTHONUNBUFFERED"] = "1"
+# rev-11 infra (OOM): glibc gives every OpenMP worker thread its own malloc arena; freed chunks
+# in those arenas are invisible to malloc_trim(0) (main arena only). During Stage-A tuning this
+# drifted +260MB over ~15 model fits and OOM-killed the kernel at 3.42GB. Capping arenas is an
+# allocator-level change only - bit-identical numerics, materially lower fragmentation.
+os.environ.setdefault("MALLOC_ARENA_MAX", "2")
 
 import nbformat
 from nbconvert.preprocessors import ExecutePreprocessor
