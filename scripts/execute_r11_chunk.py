@@ -133,7 +133,7 @@ class ChunkedExecutor(ExecutePreprocessor):
         # (per-config r7_cache checkpoints inside the tuning cells make the interrupt
         # resumable; a SIGKILL from the tool timeout would do the same but loses the
         # notebook save and any in-flight checkpoint dump less cleanly).
-        self.timeout = max(30, min(remaining, self._HARD_CELL_CAP))
+        self.timeout = int(max(30, min(remaining, self._HARD_CELL_CAP)))
         if _KPID[0] is None or _rss(_KPID[0]) < 0:
             _KPID[0] = _kernel_pid()
         _start_watch()
