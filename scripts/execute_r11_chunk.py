@@ -22,6 +22,7 @@ os.environ["PYTHONUNBUFFERED"] = "1"
 
 import nbformat
 from nbconvert.preprocessors import ExecutePreprocessor
+from nbclient.exceptions import CellTimeoutError
 
 SRC = "/home/z/my-project/trac-phish-revision11.ipynb"
 DST = "/home/z/my-project/trac-phish-revision11_FULL_EXECUTED.ipynb"
@@ -117,21 +118,38 @@ class ChunkedExecutor(ExecutePreprocessor):
     budget_out = False
     _r11_done = 0
 
+    _HARD_CELL_CAP = 18000
+
     def preprocess_cell(self, cell, resources, index):
         if cell.cell_type != "code":
             return cell, resources
         head = (cell.source.splitlines()[0][:66] if cell.source else "")[:66]
-        if time.time() - t_start > BUDGET:
+        remaining = BUDGET - (time.time() - t_start)
+        if remaining <= 0:
             self.budget_out = True
             print(f"[cell {index:>3}] SKIP (budget exhausted) {head}", flush=True)
             raise RuntimeError("__BUDGET__")
+        # rev-11 infra: interrupt a long cell GRACEFULLY when the chunk budget runs out
+        # (per-config r7_cache checkpoints inside the tuning cells make the interrupt
+        # resumable; a SIGKILL from the tool timeout would do the same but loses the
+        # notebook save and any in-flight checkpoint dump less cleanly).
+        self.timeout = max(30, min(remaining, self._HARD_CELL_CAP))
         if _KPID[0] is None or _rss(_KPID[0]) < 0:
             _KPID[0] = _kernel_pid()
         _start_watch()
         kpeak0 = watch.peak if watch else 0
         print(f"[cell {index:>3}] RUN  {head} (parent {_rss()} MB, kernel {_rss(_KPID[0])} MB, t+{time.time()-t_start:.0f}s)", flush=True)
         t0 = time.time()
-        cell, resources = super().preprocess_cell(cell, resources, index)
+        try:
+            cell, resources = super().preprocess_cell(cell, resources, index)
+        except CellTimeoutError:
+            self.budget_out = True
+            print(f"[cell {index:>3}] INTERRUPT (budget) {head} ({time.time() - t0:.1f}s)", flush=True)
+            try:
+                nbformat.write(nb, DST)
+            except Exception as e:
+                print(f"[cell {index:>3}] SAVE-SKIP {type(e).__name__}: {e}", flush=True)
+            raise RuntimeError("__BUDGET__")
         dt = time.time() - t0
         try:
             cell["execution_count"] = self._r11_done + 1
@@ -160,6 +178,8 @@ except RuntimeError as e:
     else:
         err = e
         print("EXECUTION ERROR:\n", "".join(traceback.format_exception(e))[-6000:], flush=True)
+except CellTimeoutError:
+    budget_out = True
 except Exception as e:
     err = e
     print("EXECUTION ERROR:\n", "".join(traceback.format_exception(e))[-6000:], flush=True)
