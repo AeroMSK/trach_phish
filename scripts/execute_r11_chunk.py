@@ -22,7 +22,7 @@ os.environ["PYTHONUNBUFFERED"] = "1"
 
 import nbformat
 from nbconvert.preprocessors import ExecutePreprocessor
-from nbclient.exceptions import CellTimeoutError
+from nbclient.exceptions import CellTimeoutError, CellExecutionError
 
 SRC = "/home/z/my-project/trac-phish-revision11.ipynb"
 DST = "/home/z/my-project/trac-phish-revision11_FULL_EXECUTED.ipynb"
@@ -142,14 +142,24 @@ class ChunkedExecutor(ExecutePreprocessor):
         t0 = time.time()
         try:
             cell, resources = super().preprocess_cell(cell, resources, index)
-        except CellTimeoutError:
-            self.budget_out = True
-            print(f"[cell {index:>3}] INTERRUPT (budget) {head} ({time.time() - t0:.1f}s)", flush=True)
-            try:
-                nbformat.write(nb, DST)
-            except Exception as e:
-                print(f"[cell {index:>3}] SAVE-SKIP {type(e).__name__}: {e}", flush=True)
-            raise RuntimeError("__BUDGET__")
+        except (CellTimeoutError, CellExecutionError) as e:
+            # A budget interrupt arrives as CellTimeoutError OR as CellExecutionError
+            # whose error output is a KeyboardInterrupt raised inside the cell.
+            is_interrupt = isinstance(e, CellTimeoutError)
+            if not is_interrupt:
+                for o in cell.get("outputs", []):
+                    if o.get("output_type") == "error" and o.get("ename") == "KeyboardInterrupt":
+                        is_interrupt = True
+                        break
+            if is_interrupt:
+                self.budget_out = True
+                print(f"[cell {index:>3}] INTERRUPT (budget) {head} ({time.time() - t0:.1f}s)", flush=True)
+                try:
+                    nbformat.write(nb, DST)
+                except Exception as e2:
+                    print(f"[cell {index:>3}] SAVE-SKIP {type(e2).__name__}: {e2}", flush=True)
+                raise RuntimeError("__BUDGET__") from None
+            raise
         dt = time.time() - t0
         try:
             cell["execution_count"] = self._r11_done + 1
