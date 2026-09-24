@@ -203,3 +203,35 @@ Work Log:
 Stage Summary:
 - All fixes committed+pushed (12 infra commits); checkpoints durable under r11_working/trac_phish_results/cache/
 - Next: Stage-A selection, 22B char models, mod-1.2 CNN, Stage-B, populations/TreeSHAP, phases H/29B/40B/23B, final reports
+
+---
+Task ID: 9
+Agent: main (Super Z)
+Task: Revision 11 execution — sandbox-reset recovery (environment + data + state restoration)
+
+Work Log:
+- Sandbox was hard-reset between sessions: entire non-git state lost (r11_working/ checkpoints, data_raw/,
+  venv packages, git remote config). Local git was back at an unrelated Initial commit.
+- Recovered from GitHub (repo is public-read): git fetch + reset --hard origin/main (HEAD 22014c1).
+  Remote history shows Tasks 7-8 work all pushed: mods 1.1-1.7 applied (3ecf506), 12 OOM-hardening infra
+  commits, Stage-A tuning milestone tag r11-stageA-tuning (2ef3eaa).
+- Rebuilt venv with pinned versions (numpy 2.1.3, pandas 2.2.3, scipy 1.14.1, sklearn 1.5.2,
+  matplotlib 3.9.2, nbformat/nbconvert/ipykernel, joblib 1.5.3, shap 0.52.0, pyarrow 25.0.1,
+  gdown 6.4.0, xgboost 2.1.4, lightgbm 4.5.0, tldextract 5.1.3). PyPI throttled (~47 KB/s);
+  aliyun mirror used (~48 MB/s).
+- Datasets restored: Datasets/grambeddings_dataset_main.rar extracted (sha256 4a5572ed... == manifest);
+  phreshphish_url_only_2026.zip re-downloaded from the user's Google Drive folder (sha256 c58b70f0... ==
+  manifest) and extracted. Both verified byte-identical to Revision-8 source archives.
+- Verified committed trac-phish-revision11.ipynb (222 cells) contains all 1.1-1.7 modification markers
+  (40B/40C base-rate, 22B2 char CNN, Phase H CORAL/cc-MMD, 29B greedy adversarial, 23B seed variance,
+  54B paper report, criteria G/H).
+- CONSEQUENCE of reset: all r7_cache/feature-cache checkpoints under r11_working/ are gone; Stage-A tuning
+  results from the lost session must be RE-COMPUTED. All infra fixes are committed, so the re-run is
+  checkpoint-resilient from cell 0.
+- PAT loss: the prior session's remote URL embedded the user's PAT; reset wiped .git/config. Read access
+  works (public repo); push requires the user to re-provide the PAT. Commits will accumulate locally
+  until then.
+
+Stage Summary:
+- Environment fully rebuilt; datasets verified; notebook mods verified intact. Relaunching chunked
+  full-scale execution (scripts/execute_r11_chunk.py) from cell 0.
