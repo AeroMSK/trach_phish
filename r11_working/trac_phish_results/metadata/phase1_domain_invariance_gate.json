@@ -1,0 +1,40 @@
+{
+  "revision": 6,
+  "n_new_features": 15,
+  "n_features_added_in_rev6": 8,
+  "max_wasserstein_rev6_features_only": 0.3342336938414901,
+  "n_rev6_features_pass": 4,
+  "gate_passed_rev6_features_only": false,
+  "standardisers": {
+    "D_host_entropy_norm_z": {
+      "mean": 3.5062279791007924,
+      "std": 0.4003878213518125,
+      "reference": "GramBeddings TRAIN partition (source-only)"
+    }
+  },
+  "max_wasserstein": 0.3342336938414901,
+  "n_pass_le_0.15": 8,
+  "n_replaced": 3,
+  "replacements": {
+    "D_subdomain_binary": {
+      "rule": "binarised at the source-TRAIN median",
+      "threshold": 1.0
+    },
+    "D_query_present": {
+      "rule": "binarised at the source-TRAIN median",
+      "threshold": 0.0
+    },
+    "D_has_query_binary": {
+      "rule": "binarised at the source-TRAIN median",
+      "threshold": 0.0
+    }
+  },
+  "exact_duplicates": [
+    "D_has_port_binary",
+    "D_query_present",
+    "D_has_query_binary",
+    "D_host_entropy_norm_z"
+  ],
+  "gate_passed": false,
+  "decision_signal": "source/target TRAIN feature distributions only; no labels, no test partition, no target metric"
+}

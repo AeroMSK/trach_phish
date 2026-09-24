@@ -1,0 +1,167 @@
+[
+  {
+    "index": 1,
+    "feature": "body_is_https",
+    "group": "H: domain-invariant (new in F60-R)",
+    "type": "binary",
+    "definition": "1 if 'https' occurs (case-insensitively) as a substring of u_body",
+    "parser_source": "body/host",
+    "expected_range": "{0,1}",
+    "notes": "concept of HTTPS without the scheme syntax",
+    "schema_version": "trac-phish-f68r-v1.0"
+  },
+  {
+    "index": 2,
+    "feature": "host_entropy_ratio",
+    "group": "H: domain-invariant (new in F60-R)",
+    "type": "ratio",
+    "definition": "host_entropy / log2(hostname_length); 0.0 when hostname_length <= 1",
+    "parser_source": "body/host",
+    "expected_range": "[0, 1]",
+    "notes": "length-normalised host entropy",
+    "schema_version": "trac-phish-f68r-v1.0"
+  },
+  {
+    "index": 3,
+    "feature": "path_token_ratio",
+    "group": "H: domain-invariant (new in F60-R)",
+    "type": "continuous",
+    "definition": "body_token_count / (path_slash_count + 1)",
+    "parser_source": "body/host",
+    "expected_range": "[0, inf)",
+    "notes": "token density per path segment",
+    "schema_version": "trac-phish-f68r-v1.0"
+  },
+  {
+    "index": 4,
+    "feature": "digit_alpha_ratio",
+    "group": "H: domain-invariant (new in F60-R)",
+    "type": "continuous",
+    "definition": "body_digit_count / (body_letter_count + 1)",
+    "parser_source": "body/host",
+    "expected_range": "[0, inf)",
+    "notes": "relative digit vs letter usage",
+    "schema_version": "trac-phish-f68r-v1.0"
+  },
+  {
+    "index": 5,
+    "feature": "subdomain_binary",
+    "group": "H: domain-invariant (new in F60-R)",
+    "type": "binary",
+    "definition": "1 if subdomain_depth > 0",
+    "parser_source": "body/host",
+    "expected_range": "{0,1}",
+    "notes": "binary form of subdomain_depth",
+    "schema_version": "trac-phish-f68r-v1.0"
+  },
+  {
+    "index": 6,
+    "feature": "has_port_binary",
+    "group": "H: domain-invariant (new in F60-R)",
+    "type": "binary",
+    "definition": "1 if the authority contains a ':' port delimiter",
+    "parser_source": "body/host",
+    "expected_range": "{0,1}",
+    "notes": "DUPLICATE of R_explicit_port by definition; retained for fidelity to the plan, reported as redundant",
+    "schema_version": "trac-phish-f68r-v1.0"
+  },
+  {
+    "index": 7,
+    "feature": "query_present",
+    "group": "H: domain-invariant (new in F60-R)",
+    "type": "binary",
+    "definition": "1 if query_length > 0",
+    "parser_source": "body/host",
+    "expected_range": "{0,1}",
+    "notes": "binary form of query_length",
+    "schema_version": "trac-phish-f68r-v1.0"
+  },
+  {
+    "index": 8,
+    "feature": "body_scheme_ratio",
+    "group": "H2: domain-invariant (new in F68-R, revision 6)",
+    "type": "ratio",
+    "definition": "(1 if 'https' in body.lower() else 0) / max(1, body_token_count)",
+    "parser_source": "body/host",
+    "expected_range": "[0, 1]",
+    "notes": "normalised form of body_is_https; not a raw count",
+    "schema_version": "trac-phish-f68r-v1.0"
+  },
+  {
+    "index": 9,
+    "feature": "host_tld_class",
+    "group": "H2: domain-invariant (new in F68-R, revision 6)",
+    "type": "categorical",
+    "definition": "0 = common ICANN gTLD (.com/.org/.net), 1 = 2-letter ccTLD, 2 = any other suffix, 3 = IP host or no public suffix",
+    "parser_source": "body/host",
+    "expected_range": "{0,1,2,3}",
+    "notes": "coarse suffix class; distribution-stable across modern URL corpora",
+    "schema_version": "trac-phish-f68r-v1.0"
+  },
+  {
+    "index": 10,
+    "feature": "path_depth_binary",
+    "group": "H2: domain-invariant (new in F68-R, revision 6)",
+    "type": "binary",
+    "definition": "1 if the number of non-empty path segments >= 2",
+    "parser_source": "body/host",
+    "expected_range": "{0,1}",
+    "notes": "binarised structural depth, robust to path-length shift",
+    "schema_version": "trac-phish-f68r-v1.0"
+  },
+  {
+    "index": 11,
+    "feature": "has_query_binary",
+    "group": "H2: domain-invariant (new in F68-R, revision 6)",
+    "type": "binary",
+    "definition": "1 if query_length > 0",
+    "parser_source": "body/host",
+    "expected_range": "{0,1}",
+    "notes": "binarised query presence (plan Blocker-7 table); definitionally equals query_present and is reported by the redundancy audit as such",
+    "schema_version": "trac-phish-f68r-v1.0"
+  },
+  {
+    "index": 12,
+    "feature": "host_entropy_norm_z",
+    "group": "H2: domain-invariant (new in F68-R, revision 6)",
+    "type": "continuous",
+    "definition": "host Shannon entropy, z-scored with SOURCE-TRAIN mean/std registered by the Phase-1 gate (raw entropy until the gate runs)",
+    "parser_source": "body/host",
+    "expected_range": "(-inf, inf)",
+    "notes": "shift-robust by construction; for tree models it is an affine copy of host entropy, which the redundancy audit reports",
+    "schema_version": "trac-phish-f68r-v1.0"
+  },
+  {
+    "index": 13,
+    "feature": "path_token_density",
+    "group": "H2: domain-invariant (new in F68-R, revision 6)",
+    "type": "continuous",
+    "definition": "body_token_count / max(path_length, 1)",
+    "parser_source": "body/host",
+    "expected_range": "[0, inf)",
+    "notes": "ratio, not a raw length",
+    "schema_version": "trac-phish-f68r-v1.0"
+  },
+  {
+    "index": 14,
+    "feature": "digit_run_max",
+    "group": "H2: domain-invariant (new in F68-R, revision 6)",
+    "type": "count",
+    "definition": "length of the longest run of consecutive digits anywhere in the URL",
+    "parser_source": "body/host",
+    "expected_range": "[0, inf)",
+    "notes": "structural, dataset-invariant",
+    "schema_version": "trac-phish-f68r-v1.0"
+  },
+  {
+    "index": 15,
+    "feature": "brand_tld_match",
+    "group": "H2: domain-invariant (new in F68-R, revision 6)",
+    "type": "binary",
+    "definition": "1 if a brand-vocabulary term occurs in the host AND a brand term occurs in the body",
+    "parser_source": "body/host",
+    "expected_range": "{0,1}",
+    "notes": "semantic-invariance check across host/body",
+    "schema_version": "trac-phish-f68r-v1.0"
+  }
+]

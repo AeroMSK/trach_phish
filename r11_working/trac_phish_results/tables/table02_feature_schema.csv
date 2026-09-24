@@ -1,0 +1,49 @@
+index,feature,group,type,definition,parser_source,expected_range,notes,schema_version
+1,url_length,A: global lexical/length,count,"len(u), u = raw URL with surrounding whitespace removed",full URL,"[1, inf)",,trac-phish-f48-v1.0
+2,hostname_length,A: global lexical/length,count,"len(host) with host as written (case preserved, no brackets)",host,"[1, inf)",,trac-phish-f48-v1.0
+3,path_length,A: global lexical/length,count,len(path); 0 if absent,path,"[0, inf)",,trac-phish-f48-v1.0
+4,query_length,A: global lexical/length,count,len(query) excluding '?'; 0 if absent,query,"[0, inf)",,trac-phish-f48-v1.0
+5,fragment_length,A: global lexical/length,count,len(fragment) excluding '#'; 0 if absent,fragment,"[0, inf)",,trac-phish-f48-v1.0
+6,token_count,A: global lexical/length,count,number of maximal Unicode-alphanumeric runs in u (regex [^\W_]+),full URL,"[0, inf)",,trac-phish-f48-v1.0
+7,avg_token_length,A: global lexical/length,continuous,mean length of those tokens,full URL,"[1, inf)",NaN if token_count == 0,trac-phish-f48-v1.0
+8,query_param_count,A: global lexical/length,count,non-empty '&'/';'-separated query components,query,"[0, inf)",,trac-phish-f48-v1.0
+9,digit_count,B: character statistics,count,number of ASCII digits 0-9 in u,full URL,"[0, inf)",,trac-phish-f48-v1.0
+10,digit_ratio,B: character statistics,ratio,digit_count / url_length,full URL,"[0, 1]",,trac-phish-f48-v1.0
+11,alphabet_ratio,B: character statistics,ratio,number of Unicode letters (str.isalpha) / url_length,full URL,"[0, 1]",,trac-phish-f48-v1.0
+12,special_count,B: character statistics,count,number of characters that are not Unicode alphanumeric,full URL,"[0, inf)",,trac-phish-f48-v1.0
+13,special_ratio,B: character statistics,ratio,special_count / url_length,full URL,"[0, 1]",,trac-phish-f48-v1.0
+14,dot_count,B: character statistics,count,count of '.' in u,full URL,"[0, inf)",,trac-phish-f48-v1.0
+15,hyphen_count,B: character statistics,count,count of '-' in u,full URL,"[0, inf)",,trac-phish-f48-v1.0
+16,underscore_count,B: character statistics,count,count of '_' in u,full URL,"[0, inf)",,trac-phish-f48-v1.0
+17,slash_count,B: character statistics,count,count of '/' in u (includes scheme '//'),full URL,"[0, inf)",,trac-phish-f48-v1.0
+18,url_entropy,B: character statistics,continuous,Shannon entropy (bits) of characters of u (case-sensitive),full URL,"[0, inf)",,trac-phish-f48-v1.0
+19,host_entropy,C: host/domain structure,continuous,Shannon entropy (bits) of characters of host (case-sensitive),host,"[0, inf)",NaN if host empty,trac-phish-f48-v1.0
+20,host_label_count,C: host/domain structure,count,number of non-empty '.'-separated host labels,host,"[1, inf)",,trac-phish-f48-v1.0
+21,subdomain_depth,C: host/domain structure,count,number of labels left of the registered domain (PSL/ICANN); 0 for IP hosts,host + PSL,"[0, inf)",,trac-phish-f48-v1.0
+22,longest_host_token,C: host/domain structure,count,max length of host tokens split on '.' and '-',host,"[0, inf)",,trac-phish-f48-v1.0
+23,host_token_length_variance,C: host/domain structure,continuous,population variance (ddof=0) of host-token lengths,host,"[0, inf)",NaN if no host tokens,trac-phish-f48-v1.0
+24,numeric_host_ratio,C: host/domain structure,ratio,fraction of host labels consisting only of ASCII digits,host,"[0, 1]",NaN if no labels,trac-phish-f48-v1.0
+25,host_digit_count,C: host/domain structure,count,number of ASCII digits in host,host,"[0, inf)",,trac-phish-f48-v1.0
+26,host_alpha_ratio,C: host/domain structure,ratio,Unicode letters in host / hostname_length,host,"[0, 1]",NaN if host empty,trac-phish-f48-v1.0
+27,path_depth,D: hierarchy/structure,count,number of NON-empty '/'-separated path segments,path,"[0, inf)",,trac-phish-f48-v1.0
+28,path_segment_count,D: hierarchy/structure,count,number of '/' characters in path (segments incl. empty),path,"[0, inf)",,trac-phish-f48-v1.0
+29,fragment_present,D: hierarchy/structure,binary,1 if a '#' delimiter is present,fragment,"{0,1}",,trac-phish-f48-v1.0
+30,explicit_port,D: hierarchy/structure,binary,1 if the authority contains a ':' port delimiter,port,"{0,1}",,trac-phish-f48-v1.0
+31,non_default_port,D: hierarchy/structure,binary,"1 if explicit port is non-numeric or not default (http 80, https 443; scheme-less: 80/443)",port+scheme,"{0,1}",,trac-phish-f48-v1.0
+32,double_slash_path,D: hierarchy/structure,binary,1 if '//' occurs in the path,path,"{0,1}",,trac-phish-f48-v1.0
+33,at_symbol_present,D: hierarchy/structure,binary,1 if '@' occurs anywhere in u,full URL,"{0,1}",,trac-phish-f48-v1.0
+34,delimiter_density,D: hierarchy/structure,ratio,"count of characters in ./?=&-_:;@#~+, divided by url_length",full URL,"[0, 1]",,trac-phish-f48-v1.0
+35,is_https,E: protocol/encoding,binary,1 if the explicit scheme is 'https' (case-insensitive); scheme-less = 0,scheme,"{0,1}",,trac-phish-f48-v1.0
+36,has_ip,E: protocol/encoding,binary,1 if host is a valid IPv4/IPv6 literal (ipaddress module),host,"{0,1}",,trac-phish-f48-v1.0
+37,has_punycode,E: protocol/encoding,binary,1 if any host label starts with 'xn--' (case-insensitive),host,"{0,1}",,trac-phish-f48-v1.0
+38,unicode_count,E: protocol/encoding,count,number of non-ASCII characters (ord > 127) in u,full URL,"[0, inf)",,trac-phish-f48-v1.0
+39,non_ascii_ratio,E: protocol/encoding,ratio,unicode_count / url_length,full URL,"[0, 1]",,trac-phish-f48-v1.0
+40,percent_encoding_count,E: protocol/encoding,count,number of %HH triplets in u,full URL,"[0, inf)",,trac-phish-f48-v1.0
+41,mixed_script,F: obfuscation/semantic,binary,1 if any single label of the Unicode-decoded host mixes letters of >= 2 script groups (CJK kana/han merged),host,"{0,1}",,trac-phish-f48-v1.0
+42,homoglyph_present,F: obfuscation/semantic,binary,"1 if a label of the Unicode-decoded host mixes Latin letters with homoglyph-set chars, or consists only of homoglyph-set letters (TR39-style mixed/whole-script confusable)",host,"{0,1}",,trac-phish-f48-v1.0
+43,repeated_char_run_count,F: obfuscation/semantic,count,number of maximal runs of >= 3 identical characters in u,full URL,"[0, inf)",,trac-phish-f48-v1.0
+44,hex_like_ratio,F: obfuscation/semantic,ratio,"total length of tokens that are hex-only, length >= 8 and contain a digit, / url_length",full URL,"[0, 1]",,trac-phish-f48-v1.0
+45,suspicious_token_count,F: obfuscation/semantic,count,tokens (lower-cased) containing >= 1 'suspicious' vocabulary term as substring,full URL + vocab,"[0, inf)",semantic,trac-phish-f48-v1.0
+46,auth_token_count,F: obfuscation/semantic,count,tokens containing >= 1 'auth' vocabulary term,full URL + vocab,"[0, inf)",semantic,trac-phish-f48-v1.0
+47,urgency_token_count,F: obfuscation/semantic,count,tokens containing >= 1 'urgency' vocabulary term,full URL + vocab,"[0, inf)",semantic,trac-phish-f48-v1.0
+48,brand_token_count,F: obfuscation/semantic,count,tokens containing >= 1 'brand' vocabulary term,full URL + vocab,"[0, inf)",semantic,trac-phish-f48-v1.0

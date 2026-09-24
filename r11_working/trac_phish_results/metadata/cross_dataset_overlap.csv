@@ -1,0 +1,5 @@
+level,shared_unique_values,gram_records_affected,gram_pct,gram_affected_phishing,phresh_records_affected,phresh_pct,phresh_affected_phishing
+exact_raw_string,90,90,0.01125612051553032,3,90,0.0135074290859973,3
+canonical_scheme_aware,136,136,0.017009248779023593,4,136,0.02041122617439592,4
+canonical_scheme_agnostic,210,212,0.026514417214360306,7,210,0.0315173345339937,8
+registered_domain,10156,103083,12.892385234471243,59222,247097,37.08494672069638,118431

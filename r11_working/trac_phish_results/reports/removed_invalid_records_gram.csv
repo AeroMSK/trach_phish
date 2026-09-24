@@ -1,0 +1,3 @@
+record_id,url_raw,label_orig,status
+382213,Reference used by Studio Oliver Gustav:%0D%0A,2,host_whitespace_or_control
+489695,https:%20//thespiritledlife.com/831047284/reporthotmail.php,1,malformed_scheme_separator

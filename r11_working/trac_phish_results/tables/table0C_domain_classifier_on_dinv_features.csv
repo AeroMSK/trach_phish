@@ -1,0 +1,3 @@
+block,domain_classifier_auc,interpretation
+revision-6 domain-invariant block (15 features),0.6762183605625,"0.5 = corpus-indistinguishable, 1.0 = perfectly corpus-identifiable"
+revision-7 repaired block (F68-R-v2),0.637696329125,target is <= 0.60

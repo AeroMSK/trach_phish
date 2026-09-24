@@ -9,3 +9,7 @@ db/
 r11_working/trac_extracted/
 r11_working/trac_phish_results/cache/
 r11_working/trac_phish_results/features/
+# >100 MB clean-metadata parquets (GitHub hard limit; recomputable by the notebook's
+# Section-13 disk cache in ~190 s; smaller CSV/JSON metadata IS tracked)
+r11_working/trac_phish_results/metadata/clean_metadata_gram.parquet
+r11_working/trac_phish_results/metadata/clean_metadata_phresh.parquet

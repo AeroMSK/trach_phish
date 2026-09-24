@@ -1,0 +1,41 @@
+{
+  "revision": 7,
+  "criterion": "max normalised Wasserstein over every domain-invariant feature <= 0.15",
+  "block_size": 15,
+  "block": [
+    "D_body_is_https",
+    "D_path_token_ratio",
+    "D_digit_alpha_ratio",
+    "D_subdomain_binary",
+    "D_body_scheme_ratio",
+    "D_host_tld_class",
+    "D_path_depth_binary",
+    "D_brand_tld_match",
+    "E_uppercase_ratio",
+    "E_entropy_self_normalised",
+    "E_path_host_len_ratio",
+    "E_path_segment_len_cv",
+    "E_digit_position_rank",
+    "E_digit_density",
+    "E_repeated_delimiter_run"
+  ],
+  "n_rev6_features_retained": 8,
+  "n_rev7_features_added": 7,
+  "max_wasserstein": 0.23592595364288776,
+  "features_above_0.15": [
+    "D_digit_alpha_ratio",
+    "D_brand_tld_match",
+    "E_digit_position_rank",
+    "E_digit_density",
+    "E_repeated_delimiter_run"
+  ],
+  "domain_classifier_auc_before": 0.6762183605625,
+  "domain_classifier_auc_after": 0.637696329125,
+  "domain_classifier_target": 0.6,
+  "domain_classifier_target_met": false,
+  "iterations_used": 3,
+  "retained_for_lack_of_replacement": [],
+  "selection_signal": "source/target TRAIN feature distributions + corpus identity ONLY; no class label, no TEST partition, no external population",
+  "gate_passed": false,
+  "passed": false
+}
