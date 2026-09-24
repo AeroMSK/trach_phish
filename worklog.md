@@ -235,3 +235,33 @@ Work Log:
 Stage Summary:
 - Environment fully rebuilt; datasets verified; notebook mods verified intact. Relaunching chunked
   full-scale execution (scripts/execute_r11_chunk.py) from cell 0.
+
+---
+Task ID: 10
+Agent: main (Super Z)
+Task: Revision 11 execution — Stage-A tuning phase + gate-verdict stability incident
+
+Work Log:
+- Resumed chunked execution after second sandbox reset; cells 0-79 re-cached (~200s prefix/chunk).
+- Executor hardened during this phase (each committed + pushed): graceful budget interrupt for long
+  cells (per-cell timeout + KeyboardInterrupt classification; exit 3 = resumable), int cast for traitlets.
+- OOM fix: post-Phase-A release before the compat benchmark (cell 77 was OOM-killed at 3.5GB RSS).
+- Pickle fix: cell-70 shift-diagnostics checkpoint dropped unpicklable closures (was PicklingError
+  every chunk, 59s recompute each restart).
+- INCIDENT (honestly recorded): the Phase-A rev-8 gate verdict was UNSTABLE across kernel restarts
+  while cell-70's checkpoint was failing to persist (fresh _rows_g/_rows_p drawn each chunk). Tuning
+  configs written under an F68RV3-era cache key (3640afd...) during that window were orphaned when
+  the verdict converged to FAIL after the checkpoint landed (restored rows). Root state now frozen:
+  FEATS parquet + search checkpoint + cell-70 checkpoint all stable -> verdict stable = FAIL
+  (max normalised Wasserstein 0.5136 > 0.15; D_subdomain_binary is the failing member; true
+  population mean-diff 0.247 > 0.15 confirms the failure is real, not a sampling artifact).
+  Consequence: F68-R-v2 stays PRIMARY (F68-R-v3 kept as ablation, exactly as the notebook's honest
+  fallback prescribes); 19 orphaned tunecfg checkpoints deleted; Stage-A tuning restarted under the
+  stable key (6ac23b...) and is progressing sequentially.
+- Stage-A tuning in progress: gram|F48 configs lr(3) + rf(3) + lgbm(8) + xgb(2) checkpointed so far
+  under the stable key; 3 more runs (gram|F68RV2, phresh|F48, phresh|F68RV2) + final fits to go.
+
+Stage Summary:
+- Execution stable and resumable; all infra fixes pushed (d101dd4, fc86634, f0cdbc7, 8caeaa0, 32b34c7).
+- Next: continue chunks through Stage-A tuning, then 22B char models, 22B2 CNN (mod 1.2), calibration,
+  populations/TreeSHAP, Phase H (1.3), 29B (1.4), 40B/40C (1.1), 23B (1.5), 54B (1.7).

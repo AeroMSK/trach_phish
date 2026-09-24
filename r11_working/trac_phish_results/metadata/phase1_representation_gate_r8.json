@@ -22,8 +22,10 @@
   "n_rev6_features_retained": 6,
   "n_rev7_features": 0,
   "n_rev8_features": 9,
-  "max_wasserstein": 0.1295930474048709,
-  "features_above_0.15": [],
+  "max_wasserstein": 0.5135845785690578,
+  "features_above_0.15": [
+    "D_subdomain_binary"
+  ],
   "domain_classifier_auc_before": 0.676248208975,
   "domain_classifier_auc_after": 0.549050067725,
   "domain_classifier_target": 0.6,
@@ -31,8 +33,8 @@
   "escalation_used": false,
   "iterations_used": 3,
   "selection_signal": "source/target TRAIN feature distributions + corpus identity ONLY; no class label, no TEST partition, no external population",
-  "gate_passed": true,
-  "passed": true,
+  "gate_passed": false,
+  "passed": false,
   "block_size_ok": true,
-  "both_targets_met": true
+  "both_targets_met": false
 }

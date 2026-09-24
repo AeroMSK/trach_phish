@@ -10,7 +10,7 @@ C4 strict external size [PhreshPhish -> GramBeddings],True,True,"118,283 records
 C5 identical feature schema,True,True,"164 common columns; F48=48, F54-R=54"
 C6 URL-only modelling,True,True,forbidden-derived feature columns: none
 C7 benchmark completed,True,True,36 benchmark rows
-C8 external ranking above chance,True,True,best Gram->Phresh strict-external ROC-AUC in the benchmark = 0.7927 (need >= 0.6)
-C9 non-degenerate external errors,True,True,"best-model external error rate = 0.3273 (ERS/DTS need error variation; allowed band [0.005, 0.6])"
+C8 external ranking above chance,True,True,best Gram->Phresh strict-external ROC-AUC in the benchmark = 0.8197 (need >= 0.6)
+C9 non-degenerate external errors,True,True,"best-model external error rate = 0.3098 (ERS/DTS need error variation; allowed band [0.005, 0.6])"
 C10 no target-dataset fitting,True,True,ledger shows no fitting step on a combined/target dataset (origin diagnostic is marked diagnostic_only)
-C11 origin separability not pathological,True,True,origin tier 'high' (AUC 0.9279) with best external ROC-AUC 0.7927
+C11 origin separability not pathological,True,True,origin tier 'high' (AUC 0.9279) with best external ROC-AUC 0.8197

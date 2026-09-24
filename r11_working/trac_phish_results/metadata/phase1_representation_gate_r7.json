@@ -21,9 +21,10 @@
   ],
   "n_rev6_features_retained": 8,
   "n_rev7_features_added": 7,
-  "max_wasserstein": 0.23592595364288776,
+  "max_wasserstein": 0.5135845785690578,
   "features_above_0.15": [
     "D_digit_alpha_ratio",
+    "D_subdomain_binary",
     "D_brand_tld_match",
     "E_digit_position_rank",
     "E_digit_density",
