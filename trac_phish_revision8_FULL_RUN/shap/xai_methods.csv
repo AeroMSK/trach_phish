@@ -1,3 +1,0 @@
-aspect,detail
-method_linear,"analytic interventional Linear SHAP (phi_j = w_j*(x_j - mu_j)), background=1000 train docs, explain=2000 test docs"
-method_lexical,"sklearn permutation_importance on HistGB (val fold sample, ROC-AUC)"

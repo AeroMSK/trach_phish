@@ -1,7 +1,0 @@
-perturbation,topk_jaccard,sign_agreement,spearman_rank,ERS
-case_random,1.0,1.0,1.0,1.0
-typo_swap,0.8472,1.0,0.9903,0.936
-pad_benign,0.3682,1.0,0.7426,0.6701
-subdomain_junk,0.7359,1.0,0.9571,0.8815
-query_junk,0.2546,0.96,0.4651,0.5294
-OVERALL(mean),0.6412,0.992,0.831,0.8034

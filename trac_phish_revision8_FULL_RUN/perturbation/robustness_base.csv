@@ -1,2 +1,0 @@
-perturbation,accuracy,precision,recall,f1,mcc,balanced_acc,roc_auc,pr_auc
-(base=none),0.97456,0.983929,0.96488,0.974311,0.949298,0.97456,0.996473,0.996861
