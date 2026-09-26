@@ -1,7 +1,0 @@
-gate,criterion,sha256
-phase1_representation,max normalised Wasserstein over every domain-invariant feature <= 0.15,4e48ea13fafb5eeb
-phase2_zero_shot,strict-external ROC-AUC >= 0.80 for at least one zero-shot/UDA model in BOTH directions,3d60e3596db611f4
-phase3_multisource,best semi-supervised multi-source strict-external ACCURACY >= 0.95 in BOTH directions,0bfd7cbee986d628
-phase4_robustness,P3 flip rate <= 15% AND P5/P6/P7 flip rate <= 15% for at least one repaired variant,4a1ad31469b9a928
-phase5_ers_target,"cross-family rho(E0, y_rel) > 0.10 on at least 3 of 4 runs",24553ef986f4245b
-phase6_decision_layer,"DTS AURC < confidence AURC with the 95% paired-bootstrap CI of the difference entirely below 0, on EVERY external run (all-pairs, never any-pair)",8bf91d1210a67893

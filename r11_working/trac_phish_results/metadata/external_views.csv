@@ -1,5 +1,0 @@
-direction,view,primary,records,phishing,benign,phishing_pct,removed_exact_overlap,removed_canonical_overlap,removed_domain_overlap,contamination_pct_of_natural
-GramBeddings -> PhreshPhish,strict_domain_unseen,True,126611,62466,64145,49.33694544707806,31,22,41396,24.663215518267286
-GramBeddings -> PhreshPhish,natural,False,168060,76800,91260,45.69796501249554,31,22,41396,24.663215518267286
-PhreshPhish -> GramBeddings,strict_domain_unseen,True,118283,59785,58498,50.54403422300753,6,16,1629,1.3765904580852801
-PhreshPhish -> GramBeddings,natural,False,119934,59962,59972,49.995831040405555,6,16,1629,1.3765904580852801

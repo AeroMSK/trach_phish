@@ -1,4 +1,0 @@
-stage,iteration,domain_clf_auc,block_size,n_failing_wasserstein,n_near_duplicate,n_dropped_this_iteration,pool_remaining,max_wasserstein
-A.2 revision-7 rule,0,0.676248208975,15,7,4,7,38,0.3342336938414901
-A.2 revision-7 rule,1,0.5835244164,15,2,0,2,31,0.23592595364288776
-A.2 revision-7 rule,2,0.549170898225,15,0,0,0,29,0.1295930474048709

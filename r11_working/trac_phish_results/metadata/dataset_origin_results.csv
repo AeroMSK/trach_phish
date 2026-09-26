@@ -1,3 +1,0 @@
-feature_set,n_gram,n_phresh,origin_roc_auc,origin_pr_auc,origin_accuracy,tn,fp,fn,tp,top_origin_features
-F48,40000,40000,0.9201994123225012,0.915388244194419,0.8409583333333334,9654,2247,1570,10529,"is_https, subdomain_depth, host_label_count, dot_count, path_length, host_token_length_variance"
-F68-R (69 cols),40000,40000,0.9279123038394509,0.9256151353098835,0.845875,10047,2041,1658,10254,"R_is_https, R_subdomain_density, R_subdomain_depth, R_body_dot_count, D_subdomain_binary, R_path_ratio"
